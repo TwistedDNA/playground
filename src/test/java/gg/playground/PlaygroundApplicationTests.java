@@ -3,8 +3,8 @@ package gg.playground;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gg.playground.entities.Gg;
-import gg.playground.repositories.GgRepository;
+import gg.playground.entities.GamerProfile;
+import gg.playground.repositories.GamerProfileRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,20 +17,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class PlaygroundApplicationTests {
 
 	@Autowired
-	private GgRepository ggRepository;
-	private Gg gg;
+	private GamerProfileRepository gamerProfileRepository;
+	private GamerProfile gamerProfile;
 
 	@Before
 	public void before(){
-		gg = new Gg("Alfa");
+		gamerProfile = new GamerProfile("Leroy", "Jenkins");
 	}
 
 	@Test
 	public void saveReadFromMongo() {
-		ggRepository.deleteAll();
-		ggRepository.save(gg);
-		Gg returned = ggRepository.findAll().stream().findFirst().get();
-		assertThat(returned).isEqualToComparingFieldByField(gg);
+		gamerProfileRepository.deleteAll();
+		gamerProfileRepository.save(gamerProfile);
+		GamerProfile returned = gamerProfileRepository.findAll().stream().findFirst().get();
+		assertThat(returned).isEqualToComparingFieldByField(gamerProfile);
 	}
 
 }
